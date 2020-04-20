@@ -33,10 +33,12 @@ class Loader {
             return .failure(.unableToParseYaml)
         }
 
-        return .success(.init(
-            templatesPath: "Templates",
-            destinationPath: "Output",
-            sourceData: yamlDictionary
-        ))
+        return .success(
+            .init(
+                templatesPath: "Templates",
+                destinationPath: "Output",
+                sourceData: yamlDictionary
+            )
+        )
     }
 }

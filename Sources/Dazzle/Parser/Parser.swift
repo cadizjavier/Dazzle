@@ -1,7 +1,7 @@
 import Foundation
-import Yams
-import Stencil
 import PathKit
+import Stencil
+import Yams
 
 class Parser {
     private var sourceData: [String: Any]

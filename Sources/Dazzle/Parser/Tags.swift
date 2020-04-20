@@ -7,7 +7,7 @@ struct Tags {
     func toDictionary() -> [String: Any] {
         return [
             "baseTags": base,
-            "eventTags": event
+            "eventTags": event,
         ]
     }
 

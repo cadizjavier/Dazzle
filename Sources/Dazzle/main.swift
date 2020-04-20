@@ -1,11 +1,11 @@
 import ArgumentParser
-import PathKit
 import Foundation
+import PathKit
 
 struct Dazzle: ParsableCommand {
     public static let configuration = CommandConfiguration(
-      abstract: "Generate analytics configuration based on YAML",
-      subcommands: [Validate.self, Scaffold.self]
+        abstract: "Generate analytics configuration based on YAML",
+        subcommands: [Validate.self, Scaffold.self]
     )
 
     @Option(name: .short, help: "Name of the analytics file.")
@@ -34,7 +34,8 @@ extension Dazzle {
 extension Dazzle {
     struct Scaffold: ParsableCommand {
         static let configuration = CommandConfiguration(
-            abstract: "Creates default templates in different languages (only Swift supported at the moment)."
+            abstract:
+                "Creates default templates in different languages (only Swift supported at the moment)."
         )
 
         func run() {
