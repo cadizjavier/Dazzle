@@ -1,11 +1,11 @@
 import ArgumentParser
-import Foundation
-import PathKit
 
 struct Dazzle: ParsableCommand {
-    public static let configuration = CommandConfiguration(
+    static let configuration = CommandConfiguration(
         abstract: "A Swift command-line tool for generating analytics.",
-        subcommands: [Generate.self, Validate.self, Scaffold.self]
+        version: "0.1.0",
+        subcommands: [Generate.self, Validate.self, Scaffold.self],
+        defaultSubcommand: Generate.self
     )
 
     init() {}
