@@ -4,15 +4,25 @@ import PathKit
 
 struct Dazzle: ParsableCommand {
     public static let configuration = CommandConfiguration(
-        abstract: "Generate analytics configuration based on YAML",
-        subcommands: [Validate.self, Scaffold.self]
+        abstract: "A Swift command-line tool for generating analytics.",
+        subcommands: [Generate.self, Validate.self, Scaffold.self]
     )
 
-    @Option(name: .short, help: "Name of the analytics file.")
-    var fileName: String?
+    init() {}
+}
 
-    func run() throws {
-        MainRunner(fileName: fileName).run()
+extension Dazzle {
+    struct Generate: ParsableCommand {
+        static let configuration = CommandConfiguration(
+            abstract: "Generate analytics configuration based on YAML."
+        )
+
+        @Argument(help: "Name of the analytics file.")
+        var fileName: String
+
+        func run() {
+            GenerateRunner(fileName: fileName).run()
+        }
     }
 }
 
@@ -22,8 +32,8 @@ extension Dazzle {
             abstract: "Validates the correctness of the input events YAML."
         )
 
-        @Option(name: .short, help: "Name of the analytics file.")
-        var fileName: String?
+        @Argument(help: "Name of the analytics file.")
+        var fileName: String
 
         func run() {
             ValidateRunner(fileName: fileName).run()

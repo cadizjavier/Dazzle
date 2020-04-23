@@ -26,7 +26,7 @@ event:
 3. Run `dazzle scaffold`. This will create full-featured templates (only Swift supported at the moment) for you. You can modify these templates or create your custom ones.
 A new folder named `Templates` will be created.
 
-4. Run `dazzle -f events.yml` and after the success message, you will see an `Output` folder with your brand new generated files. If you open the Swift one you will see something like this.
+4. Run `dazzle generate events.yml` and after the success message, you will see an `Output` folder with your brand new generated files. If you open the Swift one you will see something like this.
 
 ```swift
 import Foundation
@@ -74,11 +74,11 @@ $ make install
 
 ### CLI commands
 
-`dazzle -f events.yml` Do the code generation for the events defined on the `events.yml` file.
+`dazzle generate events.yml` Do the code generation for the events defined on the `events.yml` file.
 
 `dazzle scaffold` Copy all the predefined templates to your project.
 
-`dazzle validate -f events.yml` Validates that the provided YAML complies with the supported DSL.
+`dazzle validate events.yml` Validates that the provided YAML complies with the supported DSL.
 
 ### YAML DSL
 

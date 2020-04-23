@@ -1,10 +1,10 @@
 import Foundation
 
-class MainRunner {
+class GenerateRunner {
     private let fileName: String
 
-    init(fileName: String?) {
-        self.fileName = fileName ?? "events.yml"
+    init(fileName: String) {
+        self.fileName = fileName
     }
 
     func run() {
