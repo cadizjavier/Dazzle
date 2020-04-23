@@ -8,7 +8,7 @@ enum {{ collection.key }}: String {
 }
 {% endfor %}
 
-enum Events {
+enum Event {
     {% for collection in eventTags %}
     case {{ collection.name }}{% if collection.references %}({% for ref in collection.references %}{{ ref.variable }}: {{ ref.type }}{% if not forloop.last %}, {% endif %}{% endfor %}){% endif %}
     {% endfor %}
@@ -28,10 +28,10 @@ enum Events {
         case .{{ collection.name }}{% if collection.references %}({% for ref in collection.references %}let {{ ref.variable }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}){% endif %}:
             return [
                 {% for key, value in collection.params %}
-                "{{ key }}": "{{ value }}"{% if not forloop.last %},{% endif %}{% if collection.references %},{% endif %}
+                "{{ key }}": "{{ value }}",
                 {% endfor %}
                 {% for ref in collection.references %}
-                "{{ ref.variable }}": {{ ref.variable }}.rawValue{% if not forloop.last %},{% endif %}
+                "{{ ref.variable }}": {{ ref.variable }}.rawValue,
                 {% endfor %}
             ]
         {% endfor %}

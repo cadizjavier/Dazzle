@@ -28,7 +28,9 @@ class Parser {
                             var variable = value
                             variable.remove(at: variable.startIndex)
 
-                            reference.append(.init(type: variable.capitalized, variable: variable))
+                            reference.append(
+                                .init(type: variable.pascalCase(), variable: variable)
+                            )
                         } else {
                             params[key] = value
                         }
@@ -47,7 +49,7 @@ class Parser {
                     return .failure(.unexpectedData)
                 }
                 tags.base.append(
-                    Tags.Base(key: key.capitalized, value: list)
+                    Tags.Base(key: key.pascalCase(), value: list)
                 )
             }
         }
