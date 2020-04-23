@@ -36,9 +36,13 @@ class Parser {
                         }
                     }
 
+                    guard let identifier = name else {
+                        return .failure(.missingEventIdentifier)
+                    }
+
                     tags.event.append(
                         Tags.Event(
-                            name: name!,
+                            name: identifier,
                             params: params,
                             references: reference
                         )
