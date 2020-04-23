@@ -21,8 +21,12 @@ class Generator {
         )
     }
 
-    func generate() -> Result<Void, Error> {
+    func generate() -> Result<Void, GeneratorError> {
         let templates = templatesPath.glob("*")
+        guard templates.count > 0 else {
+            return .failure(.missingTemplatesFolder)
+        }
+
         let fileNames = templates.compactMap { $0.components.last }
 
         do {
@@ -30,17 +34,21 @@ class Generator {
                 try destinationPath.delete()
             }
             try destinationPath.mkdir()
+        } catch {
+            return .failure(.unableToRegenerateOutputFolder)
+        }
 
+        do {
             for fileName in fileNames {
                 let destinationFileName = destinationPath + Path(fileName)
                 let output = try renderTemplate(templateName: fileName)
                 try destinationFileName.write(output)
             }
-
-            return .success(())
-        } catch let error {
-            return .failure(error)
+        } catch {
+            return .failure(.unableToRenderTemplate)
         }
+
+        return .success(())
     }
 
     private func renderTemplate(templateName: String) throws -> String {
