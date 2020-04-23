@@ -7,9 +7,7 @@ Initially we only support Swift generation.
 
 ## Quick Start
 
-1. Create a new folder for your awesome analytics project.
-
-2. Inside the new folder create an `events.yml` file and put the following inside.
+1. Inside your brand new project folder create an `events.yml` file and put the following inside.
 
 ```yaml
 screen:
@@ -23,10 +21,10 @@ event:
     screen: =screen
 ```
 
-3. Run `dazzle scaffold`. This will create full-featured templates (only Swift supported at the moment) for you. You can modify these templates or create your custom ones.
+2. Run `dazzle scaffold`. This will create full-featured templates (only Swift supported at the moment) for you. You can modify these templates or create your custom ones.
 A new folder named `Templates` will be created.
 
-4. Run `dazzle generate events.yml` and after the success message, you will see an `Output` folder with your brand new generated files. If you open the Swift one you will see something like this.
+3. Run `dazzle generate events.yml` and after the success message, you will see an `Output` folder with your brand new generated files. If you open the Swift one you will see something like this.
 
 ```swift
 import Foundation
@@ -58,8 +56,6 @@ enum Event {
 }
 ```
 
-5. That's all. This generated file is ready to be included in your project.
-
 ## Installation
 
 ### Make
@@ -74,7 +70,7 @@ $ make install
 
 ### CLI commands
 
-`dazzle generate events.yml` Do the code generation for the events defined on the `events.yml` file.
+`dazzle generate events.yml` Do code generation for the events defined on the `events.yml` file. This is the default command, if you omit the `generate` word it will work.
 
 `dazzle scaffold` Copy all the predefined templates to your project.
 
