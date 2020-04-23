@@ -9,36 +9,34 @@ class Loader {
         self.sourcePath = sourcePath
     }
 
-    func load() -> Result<Brain, LoaderError> {
+    func load() throws -> Brain {
 
         guard let sourcePath = sourcePath else {
-            return .failure(.missingConfigFile)
+            throw LoaderError.missingConfigFile
         }
 
         let path = Path(sourcePath)
 
         guard path.exists else {
-            return .failure(.missingSourceFile)
+            throw LoaderError.missingSourceFile
         }
 
         guard let sourceContent: String = try? path.read() else {
-            return .failure(.unableToLoadSourceFile)
+            throw LoaderError.unableToLoadSourceFile
         }
 
         guard let yamlContent = try? Yams.load(yaml: sourceContent) else {
-            return .failure(.unableToLoadYaml)
+            throw LoaderError.unableToLoadYaml
         }
 
         guard let yamlDictionary = yamlContent as? [String: Any] else {
-            return .failure(.unableToParseYaml)
+            throw LoaderError.unableToParseYaml
         }
 
-        return .success(
-            .init(
-                templatesPath: "Templates",
-                destinationPath: "Output",
-                sourceData: yamlDictionary
-            )
+        return .init(
+            templatesPath: "Templates",
+            destinationPath: "Output",
+            sourceData: yamlDictionary
         )
     }
 }

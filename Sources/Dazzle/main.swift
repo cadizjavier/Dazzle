@@ -20,8 +20,8 @@ extension Dazzle {
         @Argument(help: "Name of the analytics file.")
         var fileName: String
 
-        func run() {
-            GenerateRunner(fileName: fileName).run()
+        func run() throws {
+            try GenerateRunner(fileName: fileName).run()
         }
     }
 }
@@ -35,8 +35,8 @@ extension Dazzle {
         @Argument(help: "Name of the analytics file.")
         var fileName: String
 
-        func run() {
-            ValidateRunner(fileName: fileName).run()
+        func run() throws {
+            try ValidateRunner(fileName: fileName).run()
         }
     }
 }
@@ -48,8 +48,8 @@ extension Dazzle {
                 "Creates default templates in different languages (only Swift supported at the moment)."
         )
 
-        func run() {
-            ScaffoldRunner().run()
+        func run() throws {
+            try ScaffoldRunner().run()
         }
     }
 }

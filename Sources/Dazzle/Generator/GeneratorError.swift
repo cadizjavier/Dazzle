@@ -1,11 +1,9 @@
 import Foundation
 
-enum GeneratorError: Error {
+enum GeneratorError: LocalizedError {
     case missingTemplatesFolder
-    case unableToRegenerateOutputFolder
-    case unableToRenderTemplate
 
-    var localizedDescription: String {
+    var errorDescription: String {
         switch self {
         case .missingTemplatesFolder:
             return """
@@ -13,8 +11,6 @@ enum GeneratorError: Error {
                 You must have a "Templates" folder with at least a template file inside.
                 The command "dazzle scaffold" will create the default templates for you.
                 """
-        default:
-            return "Unable to write the generated files."
         }
     }
 }

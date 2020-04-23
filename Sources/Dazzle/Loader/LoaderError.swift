@@ -1,13 +1,13 @@
 import Foundation
 
-enum LoaderError: Error {
+enum LoaderError: LocalizedError {
     case missingConfigFile
     case missingSourceFile
     case unableToLoadSourceFile
     case unableToLoadYaml
     case unableToParseYaml
 
-    var localizedDescription: String {
+    var errorDescription: String? {
         switch self {
         case .missingConfigFile:
             return """
@@ -17,7 +17,7 @@ enum LoaderError: Error {
                 - Pass te path of the events filename using the -f flag.
                 """
         default:
-            return "Missing error description."
+            return nil
         }
     }
 }

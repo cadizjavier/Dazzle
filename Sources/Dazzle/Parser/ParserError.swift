@@ -1,12 +1,12 @@
 import Foundation
 
-enum ParserError: Error {
+enum ParserError: LocalizedError {
     case unableToLoadYaml
     case unableToParseYaml
     case unexpectedData
     case missingEventIdentifier
 
-    var localizedDescription: String {
+    var errorDescription: String? {
         switch self {
         case .unexpectedData:
             return """
@@ -18,7 +18,7 @@ enum ParserError: Error {
                 Every event should have a key called "name" that will be the identifier used in the analytics.
                 """
         default:
-            return "Missing error description."
+            return nil
         }
     }
 }

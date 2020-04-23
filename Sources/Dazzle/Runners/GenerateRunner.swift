@@ -7,31 +7,17 @@ class GenerateRunner {
         self.fileName = fileName
     }
 
-    func run() {
-        switch Loader(sourcePath: fileName).load() {
-        case .success(let brain):
-            let parser = Parser(sourceData: brain.sourceData)
-            switch parser.parse() {
-            case .success(let tags):
-                let generator = Generator(
-                    templatesPath: brain.templatesPath,
-                    destinationPath: brain.destinationPath,
-                    tags: tags
-                )
+    func run() throws {
+        let brain = try Loader(sourcePath: fileName).load()
+        let tags = try Parser(sourceData: brain.sourceData).parse()
 
-                switch generator.generate() {
-                case .success:
-                    print("Generation finished successfully.")
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+        let generator = Generator(
+            templatesPath: brain.templatesPath,
+            destinationPath: brain.destinationPath,
+            tags: tags
+        )
 
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
+        try generator.generate()
+        print("Generation finished successfully.")
     }
 }

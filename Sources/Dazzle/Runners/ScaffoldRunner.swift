@@ -2,7 +2,7 @@ import PathKit
 
 class ScaffoldRunner {
 
-    func run() {
+    func run() throws {
         let originPath = Path("/usr/local/share/dazzle/Templates")
         let destinationPath = Path.current + Path("Templates")
 
@@ -11,10 +11,6 @@ class ScaffoldRunner {
             return
         }
 
-        do {
-            try originPath.copy(destinationPath)
-        } catch {
-            print("Can't copy template files.")
-        }
+        try originPath.copy(destinationPath)
     }
 }

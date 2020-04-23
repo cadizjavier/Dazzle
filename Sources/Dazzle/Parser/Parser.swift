@@ -10,7 +10,7 @@ class Parser {
         self.sourceData = sourceData
     }
 
-    func parse() -> Result<Tags, ParserError> {
+    func parse() throws -> Tags {
         var tags = Tags()
 
         for (key, value) in sourceData {
@@ -37,7 +37,7 @@ class Parser {
                     }
 
                     guard let identifier = name else {
-                        return .failure(.missingEventIdentifier)
+                        throw ParserError.missingEventIdentifier
                     }
 
                     tags.event.append(
@@ -50,7 +50,7 @@ class Parser {
                 }
             } else {
                 guard let list = value as? [String] else {
-                    return .failure(.unexpectedData)
+                    throw ParserError.unexpectedData
                 }
                 tags.base.append(
                     Tags.Base(key: key.pascalCase(), value: list)
@@ -58,6 +58,6 @@ class Parser {
             }
         }
 
-        return .success(tags)
+        return tags
     }
 }

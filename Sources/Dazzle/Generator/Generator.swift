@@ -21,34 +21,23 @@ class Generator {
         )
     }
 
-    func generate() -> Result<Void, GeneratorError> {
+    func generate() throws {
         let templates = templatesPath.glob("*")
         guard templates.count > 0 else {
-            return .failure(.missingTemplatesFolder)
+            throw GeneratorError.missingTemplatesFolder
         }
+
+        if destinationPath.exists {
+            try destinationPath.delete()
+        }
+        try destinationPath.mkdir()
 
         let fileNames = templates.compactMap { $0.components.last }
-
-        do {
-            if destinationPath.exists {
-                try destinationPath.delete()
-            }
-            try destinationPath.mkdir()
-        } catch {
-            return .failure(.unableToRegenerateOutputFolder)
+        for fileName in fileNames {
+            let destinationFileName = destinationPath + Path(fileName)
+            let output = try renderTemplate(templateName: fileName)
+            try destinationFileName.write(output)
         }
-
-        do {
-            for fileName in fileNames {
-                let destinationFileName = destinationPath + Path(fileName)
-                let output = try renderTemplate(templateName: fileName)
-                try destinationFileName.write(output)
-            }
-        } catch {
-            return .failure(.unableToRenderTemplate)
-        }
-
-        return .success(())
     }
 
     private func renderTemplate(templateName: String) throws -> String {
