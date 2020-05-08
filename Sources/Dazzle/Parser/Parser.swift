@@ -24,12 +24,16 @@ class Parser {
                     for (key, value) in event {
                         if key == "name" {
                             name = value
+                        } else if value == "=input" {
+                            reference.append(
+                                .init(fixedInput: false, type: "String", variable: key)
+                            )
                         } else if value.starts(with: "=") {
                             var variable = value
                             variable.remove(at: variable.startIndex)
 
                             reference.append(
-                                .init(type: variable.pascalCase(), variable: variable)
+                                .init(fixedInput: true, type: variable.pascalCase(), variable: variable)
                             )
                         } else {
                             params[key] = value

@@ -22,6 +22,7 @@ struct Tags {
         let references: [Reference]
 
         struct Reference {
+            let fixedInput: Bool
             let type: String
             let variable: String
         }

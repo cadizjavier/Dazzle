@@ -94,7 +94,11 @@ event:
 There are only two requirements: The root node of the array needs be called `event` and every element of the array needs to have a key called `name` that will be used as the identifier for the generated enumeration.
 
 You can define as many extra root nodes as you want and they will be the variables and possible different states that a key could have.
-Let's say for example that our `event_1` can be triggered using `swipe` or `tap`. You can define an `action` variable that includes both states and then refer to that variable with the `=` prefix like so.
+Two types of variables exist:
+  - Let's say for example that our `event_1` can be triggered using `swipe` or `tap`. You can define an `action` variable that includes both states and then refer to that variable with the `=` prefix like so.
+  - For free input variable text the tag `=input` is provided.
+
+Example:
 
 ```yaml
 action:
@@ -106,6 +110,7 @@ events:
     name: event_1
     control: list
     action: =action
+    input: =input
 ```
 
 ### Integration
@@ -114,7 +119,7 @@ Let's say that you want to generate analytics for your brand new app using this 
 
 ```swift
 class MyAnalytics {
-    
+
     static func log(event: Event) {
         // Firebase example of custom event
         Analytics.logEvent(event.name, parameters: event.params)
@@ -142,7 +147,7 @@ MyAnalytics.log(event: .event_1(action: .tap))
 
 ### Exposed Stencil variables
 
-- `baseTag`  
+- `baseTag` 
 It provides all the info relative to the root nodes that will act as the variables of the events.
 Each element of the collection is a variable with all the possible states and the following structure:
     - `key`: The name of the root node.
@@ -151,8 +156,9 @@ Each element of the collection is a variable with all the possible states and th
 - `eventTag` Provides a collection of all the possible events.
 Each element of the collection has the following structure:
     - `name`: The primary identifier of the event.
-    - `params`: A dictionary of type [String: String] that has all the remaining keys and values of all the parameters of the event.  
+    - `params`: A dictionary of type [String: String] that has all the remaining keys and values of all the parameters of the event.
     - `references`: Since an event can contain variables, this structure has an array of all the defined variables (character `=` in the YAML) as follow:
+        - `fixedInput`: Boolean that identifies if the value is based on fixed values or if is a free input.
         - `type`: The type of the variable.
         - `variable`: The name of the variable.
 

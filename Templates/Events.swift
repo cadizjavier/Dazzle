@@ -31,7 +31,11 @@ enum Event {
                 "{{ key }}": "{{ value }}",
                 {% endfor %}
                 {% for ref in collection.references %}
+                    {% if ref.fixedInput %}
                 "{{ ref.variable }}": {{ ref.variable }}.rawValue,
+                    {% else %}
+                "{{ ref.variable }}": {{ ref.variable }},
+                    {% endif %}
                 {% endfor %}
             ]
         {% endfor %}
