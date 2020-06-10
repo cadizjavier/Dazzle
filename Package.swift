@@ -7,7 +7,7 @@ let package = Package(
         .executable(name: "dazzle", targets: ["Dazzle"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.5"),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "0.1.0"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "3.0.0"),
         .package(url: "https://github.com/stencilproject/Stencil.git", from: "0.13.0")
     ],
