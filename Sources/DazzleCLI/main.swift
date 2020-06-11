@@ -1,4 +1,5 @@
 import ArgumentParser
+import Dazzle
 
 struct Dazzle: ParsableCommand {
     static let configuration = CommandConfiguration(

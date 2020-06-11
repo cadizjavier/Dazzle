@@ -1,8 +1,8 @@
 import Foundation
 
-struct Tags {
-    var base: [Base] = []
-    var event: [Event] = []
+public struct Tags {
+    public var base: [Base] = []
+    public var event: [Event] = []
 
     func toDictionary() -> [String: Any] {
         return [
@@ -11,20 +11,20 @@ struct Tags {
         ]
     }
 
-    struct Base {
-        let key: String
-        let value: [String]
+    public struct Base {
+        public let key: String
+        public let value: [String]
     }
 
-    struct Event {
-        let name: String
-        let params: [String: String]
-        let references: [Reference]
+    public struct Event {
+        public let name: String
+        public let params: [String: String]
+        public let references: [Reference]
 
-        struct Reference {
-            let fixedInput: Bool
-            let type: String
-            let variable: String
+        public struct Reference {
+            public let fixedInput: Bool
+            public let type: String
+            public let variable: String
         }
     }
 }

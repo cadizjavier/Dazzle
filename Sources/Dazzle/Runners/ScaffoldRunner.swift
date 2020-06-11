@@ -1,8 +1,10 @@
 import PathKit
 
-class ScaffoldRunner {
+public class ScaffoldRunner {
 
-    func run() throws {
+    public init() {}
+
+    public func run() throws {
         let originPath = Path("/usr/local/share/dazzle/Templates")
         let destinationPath = Path.current + Path("Templates")
 

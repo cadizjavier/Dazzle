@@ -1,13 +1,13 @@
 import Foundation
 
-class GenerateRunner {
+public class GenerateRunner {
     private let fileName: String
 
-    init(fileName: String) {
+    public init(fileName: String) {
         self.fileName = fileName
     }
 
-    func run() throws {
+    public func run() throws {
         let brain = try Loader(sourcePath: fileName).load()
         let tags = try Parser(sourceData: brain.sourceData).parse()
 

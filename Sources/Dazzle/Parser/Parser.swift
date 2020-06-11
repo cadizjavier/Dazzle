@@ -3,14 +3,14 @@ import PathKit
 import Stencil
 import Yams
 
-class Parser {
+public class Parser {
     private var sourceData: [String: Any]
 
-    init(sourceData: [String: Any]) {
+    public init(sourceData: [String: Any]) {
         self.sourceData = sourceData
     }
 
-    func parse() throws -> Tags {
+    public func parse() throws -> Tags {
         var tags = Tags()
 
         for (key, value) in sourceData {

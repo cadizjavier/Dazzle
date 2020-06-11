@@ -4,7 +4,8 @@ import PackageDescription
 let package = Package(
     name: "Dazzle",
     products: [
-        .executable(name: "dazzle", targets: ["Dazzle"])
+        .library(name: "Dazzle", targets: ["Dazzle"]),
+        .executable(name: "dazzle-cli", targets: ["DazzleCLI"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "0.1.0"),
@@ -16,6 +17,14 @@ let package = Package(
             .product(name: "ArgumentParser", package: "swift-argument-parser"),
             .product(name: "Yams", package: "Yams"),
             .product(name: "Stencil", package: "Stencil")
-        ])
+        ]),
+        .target(
+            name: "DazzleCLI",
+            dependencies: ["Dazzle"]
+        ),
+        .testTarget(
+            name: "DazzleTests",
+            dependencies: ["Dazzle"]
+		),
     ]
 )
