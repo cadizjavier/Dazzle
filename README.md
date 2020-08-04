@@ -78,24 +78,40 @@ $ make install
 
 ### YAML DSL
 
+
+#### General spec
+
 You can define as many events as you want and the dictionary can have any amount of key-value pairs.
 
 ```yaml
-event:
+screen:
+  - home
+  - settings
+
+firstFlow:
   -
     name: event_1
     control: list
     action: swipe
+
+secondFlow:
   -
     name: event_2
     action: tap
 ```
 
-There are only two requirements: The root node of the array needs be called `event` and every element of the array needs to have a key called `name` that will be used as the identifier for the generated enumeration.
+There are two types of root nodes:
 
-You can define as many extra root nodes as you want and they will be the variables and possible different states that a key could have.
+1. An array of elements defines the possible different states that a key could have. These are support nodes for reusable values.
+
+2. An array of dictionaries defines the events. Every element of the array needs to have a key called `name`. This key will be the identifier for the generated enumeration. These are the main nodes and contains the actual tracked events. You can have as many of these nodes as you want.
+
+#### Variables
+
 Two types of variables exist:
+
   - Let's say for example that our `event_1` can be triggered using `swipe` or `tap`. You can define an `action` variable that includes both states and then refer to that variable with the `=` prefix like so.
+
   - For free input variable text the tag `=input` is provided.
 
 Example:

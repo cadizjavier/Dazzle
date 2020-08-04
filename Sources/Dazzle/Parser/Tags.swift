@@ -1,17 +1,17 @@
 import Foundation
 
 public struct Tags {
-    public var base: [Base] = []
-    public var event: [Event] = []
+    public var common: [Common] = []
+    public var events: [String: [Event]] = [:]
 
     func toDictionary() -> [String: Any] {
         return [
-            "baseTags": base,
-            "eventTags": event,
+            "commonTags": common,
+            "eventsTags": events,
         ]
     }
 
-    public struct Base {
+    public struct Common {
         public let key: String
         public let value: [String]
     }

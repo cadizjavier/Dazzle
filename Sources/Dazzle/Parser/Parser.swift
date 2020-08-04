@@ -5,17 +5,19 @@ import Yams
 
 public class Parser {
     private var sourceData: [String: Any]
+    private var tags = Tags()
 
     public init(sourceData: [String: Any]) {
         self.sourceData = sourceData
     }
 
     public func parse() throws -> Tags {
-        var tags = Tags()
-
         for (key, value) in sourceData {
-            if key == "event" {
-                let events = value as! [[String: String]]
+            /*
+             Everything that is an array of dictionaries will
+             be a collection of events.
+             */
+            if let events = value as? [[String: String]] {
                 for event in events {
                     var name: String?
                     var params: [String: String] = [:]
@@ -44,7 +46,12 @@ public class Parser {
                         throw ParserError.missingEventIdentifier
                     }
 
-                    tags.event.append(
+                    let pascalKey = key.pascalCase()
+                    if tags.events[pascalKey] == nil {
+                        tags.events[pascalKey] = []
+                    }
+
+                    tags.events[pascalKey]?.append(
                         Tags.Event(
                             name: identifier,
                             params: params,
@@ -52,12 +59,15 @@ public class Parser {
                         )
                     )
                 }
-            } else {
-                guard let list = value as? [String] else {
-                    throw ParserError.unexpectedData
-                }
-                tags.base.append(
-                    Tags.Base(key: key.pascalCase(), value: list)
+            }
+
+            /*
+             Otherwise (array of values) it will refer as the
+             the common values that can be used as multiple selections.
+             */
+            if let values = value as? [String] {
+                tags.common.append(
+                    Tags.Common(key: key.pascalCase(), value: values)
                 )
             }
         }
