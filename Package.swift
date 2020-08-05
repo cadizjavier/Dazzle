@@ -5,7 +5,7 @@ let package = Package(
     name: "Dazzle",
     products: [
         .library(name: "Dazzle", targets: ["Dazzle"]),
-        .executable(name: "dazzle-cli", targets: ["DazzleCLI"])
+        .executable(name: "dazzle", targets: ["DazzleCLI"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "0.1.0"),

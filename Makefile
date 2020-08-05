@@ -18,5 +18,5 @@ install: build
 
 uninstall:
 	rm -f $(INSTALL_PATH)
-	rm -f $(SHARE_PATH)
+	rm -rf $(SHARE_PATH)
 
